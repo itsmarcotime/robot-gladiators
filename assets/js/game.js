@@ -3,13 +3,16 @@ var playerHealth = 100;
 var playerAttack = 10;
 var playerMoney = 10;
 
-console.log(playerName, playerAttack, playerHealth);
-
 var enemyNames = ["EVIL CHI", "Chichibot", "Chirouble"];
 var enemyHealth = 50;
 var enemyAttack = 12;
 
-var fight = function (enemyName) {
+console.log(enemyNames);
+console.log(enemyNames.length);
+console.log(enemyNames[0]);
+console.log(enemyNames[3]);
+
+var fight = function(enemyName) {
 
     //repeat and execute as long as enemy is alive
     while (playerHealth > 0 && enemyHealth > 0) {
@@ -49,9 +52,8 @@ var fight = function (enemyName) {
             window.alert(enemyName + " has died!");
 
             break;
-
         } else {
-            window.alert(enemyName + " still has " + enemyHealth + " health leaft.");
+            window.alert(enemyName + " still has " + enemyHealth + " health left.");
         }
 
         // remove player's health by subtracting the amount set in the enemyAttack variable
@@ -68,11 +70,9 @@ var fight = function (enemyName) {
             window.alert(playerName + " has died!");
 
             break;
-
         } else {
             window.alert(playerName + " still has " + playerHealth + " health left.");
         }
-
 
     }
 
@@ -80,11 +80,25 @@ var fight = function (enemyName) {
 
 for (var i = 0; i < enemyNames.length; i++) {
 
-    var pickedEnemyName = enemyNames[i];
+    if (playerHealth > 0) {
+        // let player know what round they are in, remember that arrays start at 0 so it needs to have 1 added to it
+        window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
 
-    enemyHealth = 50;
+        // pick new enemy to fight based on the index of the enemyNames array
+        var pickedEnemyName = enemyNames[i];
 
-    fight(pickedEnemyName);
+        // reset enemyHealth before starting new round
+        enemyHealth = 50;
+        
+        // use debugger to pause script from running and check what's going on at that moment in the code
+        //debugger;
+
+        // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
+        fight(pickedEnemyName);
+    } else {
+        window.alert("You have lost your robot in battle! Game Over!");
+        break;
+    }
 
 }
 
