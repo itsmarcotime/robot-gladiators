@@ -48,6 +48,9 @@ var fight = function (enemyName) {
 
             window.alert(enemyName + " has died!");
 
+            //award player money for winning
+            playerMoney = playerMoney + 20;
+
             break;
         } else {
             window.alert(enemyName + " still has " + enemyHealth + " health left.");
