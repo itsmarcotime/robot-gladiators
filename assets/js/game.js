@@ -188,7 +188,7 @@ var startGame = function () {
 
         if (playerInfo.health > 0) {
             // let player know what round they are in, remember that arrays start at 0 so it needs to have 1 added to it
-            window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
+            window.alert("Welcome to CHICHI Gladiators! Round " + (i + 1));
 
             // pick new enemy to fight based on the index of the enemy.names array
             var pickedEnemyObj = enemyInfo[i];
@@ -228,21 +228,32 @@ var startGame = function () {
 var endGame = function () {
     window.alert("the game has now ened. Lets see how you did!");
 
-    //if player is still alive
-    if (playerInfo.health > 0) {
-
-        window.alert("Great Job! you've survived the game! you now have a score of " + playerInfo.money + ".");
-
-    } else {
-        window.alert("You've lost your robot in battle!");
+    //check localstorage for the highscore, if its not there use 0
+    var highScore = localStorage.getItem("highscore");
+    if (highScore === null) {
+        highScore = 0;
     }
 
-    var playAgainConfirm = window.confirm("Wouls you like to play again?");
+    //if player has more money than the high score, player has the new high score!
+    if (playerInfo.money > highScore) {
+        
+        localStorage.setItem("highscore", playerInfo.money);
 
+        localStorage.setItem("name", playerInfo.name);
+
+        alert(playerInfo.name + " now has the high score of " + playerInfo.money + "!");
+
+    } else {
+        alert(playerInfo.name + " did not beat the high score of " + highScore + ". Maybe next time!");
+    }
+
+    //ask player if theyd like to play again
+    var playAgainConfirm = window.confirm("Would you like to play again?");
 
     if (playAgainConfirm) {
-        //resart game
+
         startGame();
+
     } else {
         window.alert("Thank you for playing Robot Gladiators! Come back soon!");
     }
